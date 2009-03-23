@@ -9,6 +9,8 @@ Fix list:
 
 * Some of the HTML we generate is invalid.
 
+* Use those fancy non-breaking hyphens for package names too.
+
 Wish list:
 
 * Basic information about repositories, along with clickies for them in places
