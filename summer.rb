@@ -455,10 +455,6 @@ ids.each do | id |
 end
 puts
 
-print "Copying extra bits"
-FileUtils.cp ExtraFiles, OutputDir
-puts
-
 print "Writing"
 [[index_page], category_pages.values, package_pages.values].each do | set |
     set.each do | page |
@@ -467,5 +463,9 @@ print "Writing"
         page.generate
     end
 end
+puts
+
+print "Copying extra bits"
+FileUtils.cp ExtraFiles, OutputDir
 puts
 
