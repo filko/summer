@@ -428,7 +428,7 @@ class IndexPage < Page
         n = 0
         @cats.keys.sort.each do | cat |
             txt << html('<td><a href="packages/') << cat << html('/index.html">') <<
-                html(html(cat.to_s).to_html.gsub("-", '&#8209;')) << html("</a></td>\n")
+                cat.to_s << html("</a></td>\n")
             if ((n += 1) == 5)
                 n = 0
                 txt << html('</tr><tr>')
