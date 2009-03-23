@@ -134,8 +134,8 @@ class CategoryPage < ChildPage
         @pkgs = Hash.new
     end
 
-    def has_package pkg
-        @pkgs[pkg] = true
+    def has_package pkg, id
+        (@pkgs[pkg] ||= []) << id
     end
 
     def title
@@ -143,9 +143,27 @@ class CategoryPage < ChildPage
     end
 
     def content
-        @pkgs.keys.sort.inject(html("<ul>\n")) do | txt, pkg |
-            txt + html('<li><a href="') + pkg.package + html('/index.html">') + pkg.package + html("</a></li>\n")
-        end + html("</ul>\n")
+        txt = html(<<-END )
+            <table class="pkglist">
+        END
+
+        @pkgs.keys.sort.each do | pkg |
+            best_id = @pkgs[pkg].max_by do | id |
+                id.version.is_scm? ? VersionSpec.new("0") : id.version
+            end
+
+            description = ""
+            description = best_id.short_description_key.value if best_id.short_description_key
+
+            txt << html('<tr><td><a href="') << pkg.package << html('/index.html">') << pkg.package <<
+                html("</a></td><td>") << description << html("</td></tr>\n")
+        end
+
+        txt << html(<<-END )
+            </table>
+        END
+
+        txt
     end
 
     def top_uri
@@ -446,7 +464,7 @@ ids.each do | id |
     index_page.has_category(id.name.category)
 
     cat_page = (category_pages[id.name.category] ||= CategoryPage.new(id.name.category))
-    cat_page.has_package(id.name)
+    cat_page.has_package(id.name, id)
     cat_page.is_in_repository(id.repository_name)
 
     pkg_page = (package_pages[id.name] ||= PackagePage.new(id.name))
