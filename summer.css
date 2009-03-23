@@ -1,0 +1,78 @@
+html {
+  color: #333333;
+  background-color: white;
+
+  background-image: url('zebrapig-headbox.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top right;
+}
+
+div#body {
+    padding: 1em 1em;
+}
+
+table.packages {
+    margin: 1em 4em 1em 0em;
+    border-spacing: 0px;
+    border: 1px solid #000000;
+}
+
+table.packages * th {
+    vertical-align: top;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.2em 1em;
+    background-color: #99ff99;
+}
+
+table.packages * td {
+    vertical-align: top;
+    text-align: left;
+    padding: 0.2em 1em;
+    border-right: 1px solid #99ff99;
+}
+
+table.packages tr.newslot td, table.packages tr.newslot th {
+    border-top: 1px solid #000000;
+}
+
+table.packages tr.sameslot td, table.packages tr.sameslot th {
+    border-top: 1px solid #99ff99;
+}
+
+table.packages * td.best-id {
+    font-weight: bold;
+}
+
+table.packages * td.platform-stable {
+    background-color: #99ff99;
+    border-right-style: none;
+    font-weight: bold;
+}
+
+table.packages * td.platform-unstable {
+    background-color: #ccffcc;
+    border-right-style: none;
+}
+
+table.packages * td.platform-disabled {
+    background-color: #ffcccc;
+    border-right-style: none;
+}
+
+table.packages * td.platform-unkeyworded {
+    background-color: #cccccc;
+    border-right-style: none;
+    color: #999999;
+}
+
+dt.significant {
+    font-weight: bold;
+}
+
+span.unsupported {
+    color: #ff00cc;
+    font-weight: bold;
+}
+
