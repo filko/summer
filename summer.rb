@@ -272,6 +272,9 @@ class PackagePage < ChildPage
             when MetadataStringKey
                 txt << html("<dd>") << key.value << html("</dd>")
 
+            when MetadataStringSetKey, MetadataStringSequenceKey
+                txt << html("<dd>") << key.value.join(', ') << html("</dd>")
+
             when MetadataSimpleURISpecTreeKey, MetadataDependencySpecTreeKey, MetadataFetchableURISpecTreeKey,
                 MetadataPlainTextSpecTreeKey
                 txt << html("<dd>")
