@@ -2,18 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Exherbo: @@TITLE@@</title>
+        <title>Exherbo: <%=h title %></title>
 
-        <link rel="stylesheet" type="text/css" href="@@TOPURI@@screen.css" />
-        <link rel="stylesheet" type="text/css" href="@@TOPURI@@summer.css" />
+        <link rel="stylesheet" type="text/css" href="<%= top_uri %>screen.css" />
+        <link rel="stylesheet" type="text/css" href="<%= top_uri %>summer.css" />
     </head>
     <body>
         <div id="head">
             <ul>
                 <li><a href="http://exherbo.org/">Exherbo</a></li>
-                <li><a href="@@TOPURI@@index.html">Packages</a></li>
+                <li><a href="<%= top_uri %>index.html">Packages</a></li>
             </ul>
         </div>
 
         <div id="body">
-            <h1>@@TITLE@@</h1>
+            <h1><%=h title %></h1>

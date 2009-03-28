@@ -4,8 +4,10 @@
 require 'Paludis'
 require 'pathname'
 require 'fileutils'
+require 'erb'
 
 include Paludis
+include ERB::Util
 
 EnvironmentSpec = ":summer"
 OutputDir = "./output/"
@@ -60,12 +62,11 @@ class Page
     def self.make_header(top_uri, title)
         @@header ||= nil
         unless @@header
-            File.open("header.html", "r") do | file |
-                @@header = file.read
-            end
+            input = File.read("header.rhtml")
+            @@header = ERB.new(input, 0, "%")
         end
 
-        @@header.gsub('@@TITLE@@', title).gsub('@@TOPURI@@', top_uri)
+        @@header.result(binding)
     end
 
     def make_header title
@@ -90,12 +91,11 @@ class Page
     def self.make_footer()
         @@footer ||= nil
         unless @@footer
-            File.open("footer.html", "r") do | file |
-                @@footer = file.read
-            end
+            input = File.read("footer.rhtml")
+            @@footer = ERB.new(input, 0, "%")
         end
 
-        @@footer
+        @@footer.result(binding)
     end
 
     def make_footer
