@@ -18,7 +18,7 @@ puts "Querying..."
 env = EnvironmentFactory.instance.create(EnvironmentSpec)
 ids = env[Selection::AllVersionsSorted.new(Generator::All.new | Filter::SupportsAction.new(InstallAction))]
 
-category_pages, package_pages = Hash.new, Hash.new
+category_pages, package_pages, repository_pages = Hash.new, Hash.new, Hash.new
 index_page = IndexPage.new
 
 print "IDs"
@@ -26,7 +26,6 @@ ids.each do | id |
     print "."
     $stdout.flush
 
-    index_page.has_repository(id.repository_name)
     index_page.has_category(id.name.category)
 
     cat_page = (category_pages[id.name.category] ||= CategoryPage.new(id.name.category))
@@ -39,8 +38,17 @@ ids.each do | id |
 end
 puts
 
+print "Repositories"
+env.package_database.repositories.each do | repo |
+    print "."
+    $stdout.flush
+    repository_pages[repo.name] = RepositoryPage.new(repo)
+    index_page.has_repository repo
+end
+puts
+
 print "Writing"
-[[index_page], category_pages.values, package_pages.values].each do | set |
+[[index_page], category_pages.values, package_pages.values, repository_pages.values].each do | set |
     set.each do | page |
         print "."
         $stdout.flush

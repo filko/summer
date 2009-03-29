@@ -348,6 +348,120 @@ class PackagePage < ChildPage
     end
 end
 
+class RepositoryPage < ChildPage
+    def initialize repo
+        super "repositories/" + repo.name
+        @repo = repo
+    end
+
+    def title
+        return html("") + @repo.name
+    end
+
+    def content
+        txt = html("")
+
+        txt << html("<h2>Metadata</h2>\n<dl>\n")
+
+        keys = []
+        @repo.each_metadata do | key |
+            keys << key
+        end
+
+        keys.sort_by do | key |
+            key.human_name
+        end.each do | key |
+            next unless %w{format sync}.include? key.human_name
+
+            case key.type
+            when MetadataKeyType::Internal
+                next
+            when MetadataKeyType::Significant
+                txt << html("<dt class='significant'>") << key.human_name << html("</dt>")
+            else
+                txt << html("<dt>") << key.human_name << html("</dt>")
+            end
+
+            case key
+            when MetadataStringKey
+                txt << html("<dd>") << key.value << html("</dd>")
+
+            when MetadataStringSetKey, MetadataStringSequenceKey
+                txt << html("<dd>") << key.value.join(', ') << html("</dd>")
+
+            when MetadataSimpleURISpecTreeKey, MetadataDependencySpecTreeKey, MetadataFetchableURISpecTreeKey,
+                MetadataPlainTextSpecTreeKey
+                txt << html("<dd>")
+                lambda do | recurse, value, top |
+                    case value
+                    when AllDepSpec
+                        recursive_top = top and not value.find do | child |
+                            not child.kind_of? AllDepSpec
+                        end
+
+                        txt << "( " unless top
+                        value.each do | child |
+                            recurse.call(recurse, child, recursive_top)
+                        end
+                        txt << ") " unless top
+
+                    when AnyDepSpec
+                        txt << "|| ( "
+                        value.each do | child |
+                            recurse.call(recurse, child, false)
+                        end
+                        txt << ") "
+
+                    when ConditionalDepSpec
+                        txt << value << " ( "
+                        value.each do | child |
+                            recurse.call(recurse, child, false)
+                        end
+                        txt << ") "
+
+                    when SimpleURIDepSpec
+                        txt << html("<a href='") << value.text << html("'>") << value.text << html("</a> ")
+
+                    when FetchableURIDepSpec
+                        txt << html("<a href='http://distfiles.exherbo.org/") << value.filename <<
+                            html("'>") << value.text << html("</a> ")
+
+                    when PackageDepSpec
+                        txt << html("<a href='../../") << value.package << html("/index.html'>") <<
+                            value.to_s << html("</a> ")
+
+                    when PlainTextDepSpec, URILabelsDepSpec, PlainTextLabelDepSpec, DependencyLabelsDepSpec,
+                        BlockDepSpec
+                        txt << value.to_s << " "
+
+                    else
+                        $stderr << "unsupported spec tree thing: " << value.class << "\n"
+                        txt << html("<span class='unsupported'>") << value.to_s <<
+                            html("</span> ")
+                    end
+                end.tap do | x |
+                    x.call(x, key.value, true)
+                end
+                txt << html("</dd>")
+
+            else
+                $stderr << "unsupported key thing: " << key.class << "\n"
+                txt << html("<dd>Don't know how to show this yet: <span class='unsupported'>") <<
+                    key.inspect << html("</span></dd>")
+            end
+        end
+
+        txt << html("</dl>\n")
+
+        txt
+    end
+
+    def top_uri
+        "../../"
+    end
+end
+
+
 class IndexPage < Page
     def initialize
         super ""
@@ -356,7 +470,7 @@ class IndexPage < Page
     end
 
     def has_repository repo
-        @repos[repo] = true
+        @repos[repo.name] = repo
     end
 
     def has_category cat
@@ -380,6 +494,29 @@ class IndexPage < Page
         @cats.keys.sort.each do | cat |
             txt << html('<td><a href="packages/') << cat << html('/index.html">') <<
                 cat.to_s << html("</a></td>\n")
+            if ((n += 1) == 5)
+                n = 0
+                txt << html('</tr><tr>')
+            end
+        end
+
+        txt << html(<<-END )
+                </tr>
+            </table>
+        END
+
+        txt << html("<h2>Repositories</h2>\n")
+
+        txt << html(<<-END )
+            <table class="repositories">
+                <colgroup span="5" width="1*" />
+                <tr>
+        END
+
+        n = 0
+        @repos.keys.sort.each do | repo |
+            txt << html('<td><a href="repositories/') << repo << html('/index.html">') <<
+                repo.to_s << html("</a></td>\n")
             if ((n += 1) == 5)
                 n = 0
                 txt << html('</tr><tr>')

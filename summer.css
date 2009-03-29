@@ -76,6 +76,11 @@ span.unsupported {
     font-weight: bold;
 }
 
-table.categories * td {
+table.categories * td, table.repositories * td {
     white-space: nowrap;
 }
+
+table.categories, table.repositories {
+    width: 80%;
+}
+
