@@ -31,7 +31,7 @@
                         title="<%=h repository_summary(id) %>"
                         class="<%=h repository_class(id) %>"><%=h repository(id) %></a></td>
                 <% platforms.each do | platform | %>
-                    <td><%=h platform %></td>
+                    <td class="<%=h platform_class(id, platform) %>"><%=h platform_text(id, platform) %></td>
                 <% end %>
             </tr>
         <% end %>

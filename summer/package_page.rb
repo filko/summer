@@ -28,6 +28,8 @@ class PackagePage < TemplatedPage
             :version               => :get_id_version,
             :repository            => :get_id_repository,
             :id_class              => :make_id_class,
+            :platform_class        => :make_platform_class,
+            :platform_text         => :get_platform_text,
             :repository_href       => :make_repository_href,
             :repository_summary    => :make_repository_summary,
             :repository_class      => :make_repository_class,
@@ -142,6 +144,34 @@ class PackagePage < TemplatedPage
             "best-id"
         else
             ""
+        end
+    end
+
+    def get_platform_text id, platform
+        return platform + "?" unless id.keywords_key
+        if id.keywords_key.value.include? platform
+            return platform
+        elsif id.keywords_key.value.include?("~" + platform)
+            return "~" + platform
+        elsif id.keywords_key.value.include?("-*")
+            return "-*"
+        elsif id.keywords_key.value.include?("-" + platform)
+            return "-" + platform
+        else
+            return platform + "?"
+        end
+    end
+
+    def make_platform_class id, platform
+        return "platform-unkeyworded" unless id.keywords_key
+        if id.keywords_key.value.include? platform
+            return "platform-stable"
+        elsif id.keywords_key.value.include?("~" + platform)
+            return "platform-unstable"
+        elsif id.keywords_key.value.include?("-*") or id.keywords_key.value.include?("-" + platform)
+            return "platform-disabled"
+        else
+            return "platform-unkeyworded"
         end
     end
 
