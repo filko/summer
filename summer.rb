@@ -77,6 +77,7 @@ puts
 
 print "Writing"
 [{ nil => index_page }, repository_pages, category_pages, package_pages].each do | set |
+    print "*"
     set.values.each do | page |
         print "."
         $stdout.flush
