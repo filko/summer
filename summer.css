@@ -89,6 +89,10 @@ table.links-list {
     width: 80%;
 }
 
+table.packages * th {
+    white-space: nowrap;
+}
+
 table.metadata * th {
     white-space: nowrap;
 }
