@@ -5,19 +5,12 @@ Or, "Statically Updated Metadata Manifestation for Exherbo Repositories".
 
 This is currently extremely crude. Patches encouraged.
 
-Fix list:
-
-* Some of the HTML we generate is invalid.
-
-* Use those fancy non-breaking hyphens for package names too.
-
 Wish list:
-
-* Basic information about repositories, along with clickies for them in places
-  like the versions table.
 
 * REMOTE_IDS
 
-* Links to packages (e.g. for deps) should have title='the summary'
+* Better deps display
+
+* Links to git logs etc.
 
 # vim: set tw=80 spell spelllang=en :
