@@ -12,13 +12,21 @@ div#body {
     padding: 1em 1em;
 }
 
-table.packages {
+div#body * a:link, div#body * a:visited {
+    text-decoration: none;
+}
+
+div#body * a:hover {
+    text-decoration: underline;
+}
+
+table.versions {
     margin: 1em 4em 1em 0em;
     border-spacing: 0px;
     border: 1px solid #000000;
 }
 
-table.packages * th {
+table.versions * th {
     vertical-align: top;
     text-align: center;
     font-weight: bold;
@@ -26,49 +34,45 @@ table.packages * th {
     background-color: #99ff99;
 }
 
-table.packages * td {
+table.versions * td {
     vertical-align: top;
     text-align: left;
     padding: 0.2em 1em;
     border-right: 1px solid #99ff99;
 }
 
-table.packages tr.newslot td, table.packages tr.newslot th {
+table.versions tr.newslot td, table.versions tr.newslot th {
     border-top: 1px solid #000000;
 }
 
-table.packages tr.sameslot td, table.packages tr.sameslot th {
+table.versions tr.sameslot td, table.versions tr.sameslot th {
     border-top: 1px solid #99ff99;
 }
 
-table.packages * td.best-id {
+table.versions * td.best-id {
     font-weight: bold;
 }
 
-table.packages * td.platform-stable {
+table.versions * td.platform-stable {
     background-color: #99ff99;
     border-right-style: none;
     font-weight: bold;
 }
 
-table.packages * td.platform-unstable {
+table.versions * td.platform-unstable {
     background-color: #ccffcc;
     border-right-style: none;
 }
 
-table.packages * td.platform-disabled {
+table.versions * td.platform-disabled {
     background-color: #ffcccc;
     border-right-style: none;
 }
 
-table.packages * td.platform-unkeyworded {
+table.versions * td.platform-unkeyworded {
     background-color: #cccccc;
     border-right-style: none;
     color: #999999;
-}
-
-dt.significant {
-    font-weight: bold;
 }
 
 span.unsupported {
@@ -76,11 +80,28 @@ span.unsupported {
     font-weight: bold;
 }
 
-table.categories * td, table.repositories * td {
+table.links-list * td {
+    white-space: nowrap;
+    padding: 0.2em 0.5em;
+}
+
+table.links-list {
+    width: 80%;
+}
+
+table.metadata * th {
     white-space: nowrap;
 }
 
-table.categories, table.repositories {
-    width: 80%;
+th {
+    vertical-align: top;
+}
+
+.repo-status-core {
+    font-weight: bold;
+}
+
+.repo-status-third-party {
+    font-style: italic;
 }
 

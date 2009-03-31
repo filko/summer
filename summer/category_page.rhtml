@@ -1,0 +1,20 @@
+<h2>Packages</h2>
+
+<table class="links-list">
+    <col span="3" width="1*" />
+    <% columnify(package_names, 3).each do | row | %>
+        <tr>
+            <% row.each do | name | %>
+                <% if name %>
+                    <td><a
+                            href="<%=h package_href(name) %>"
+                            title="<%=h package_summary(name) %>"><%=h name %></a>
+                    </td>
+                <% else %>
+                    <td> &nbsp; </td>
+                <% end %>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+

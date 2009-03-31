@@ -1,0 +1,39 @@
+<h2>Repositories</h2>
+
+<table class="links-list">
+    <col span="3" width="1%" />
+    <% columnify(repository_names, 3).each do | row | %>
+        <tr>
+            <% row.each do | repo_name | %>
+                <% if repo_name %>
+                    <td><a
+                            href="<%=h repository_href(repo_name) %>"
+                            title="<%=h repository_summary(repo_name) %>"
+                            class="<%=h repository_class(repo_name) %>"><%=h repo_name %></a>
+                    </td>
+                <% else %>
+                    <td> &nbsp; </td>
+                <% end %>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+
+<h2>Categories</h2>
+
+<table class="links-list">
+    <col span="3" width="1*" />
+    <% columnify(category_names, 3).each do | row | %>
+        <tr>
+            <% row.each do | cat_name | %>
+                <% if cat_name %>
+                    <td><a href="<%=h category_href(cat_name) %>"><%=h cat_name %></a>
+                    </td>
+                <% else %>
+                    <td> &nbsp; </td>
+                <% end %>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+

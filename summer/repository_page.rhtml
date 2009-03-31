@@ -1,0 +1,15 @@
+<% if summary %>
+    <p><%=h summary %>.</p>
+<% end %>
+
+<h2>Metadata</h2>
+
+<table class="metadata">
+    <% metadata_keys.each do | key | %>
+        <tr>
+            <th><%=h key.human_name %></th>
+            <td><%=key_value key %></td>
+        </tr>
+    <% end %>
+</table>
+
