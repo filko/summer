@@ -36,7 +36,10 @@ class IndexPage < TemplatedPage
     end
 
     def repository_names
-        @repositories.keys.sort
+        @repositories.keys.sort_by do | repo_name |
+            [ @repositories[repo_name]['status'] && @repositories[repo_name]['status'].value == "core" ? 0 : 1,
+                repo_name ]
+        end
     end
 
     def add_repository repo
