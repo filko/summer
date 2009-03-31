@@ -21,4 +21,10 @@ Wish list:
 
 * Add in licences, and links to licences.
 
+* Refactor some of the fairly common make / add methods into modules.
+
+* Bug search URLs
+
+* Link to the category from package pages.
+
 # vim: set tw=80 spell spelllang=en :
