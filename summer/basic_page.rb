@@ -88,11 +88,7 @@ class BasicPage
             first = s
         end
 
-        if spec.kind_of? AllDepSpec
-            skip_boring_specs first
-        else
-            first
-        end
+        skip_boring_specs first
     end
 
     def metadata_key_value_to_html key
