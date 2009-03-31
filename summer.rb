@@ -20,6 +20,8 @@ def find_elibible_ids_and_repos env
     env.package_database.repositories.each do | repo |
         if repo['summary'] or repo['format'].value == "unwritten"
             repos << repo
+        else
+            $stderr << "Eek. Skipping repository " << repo.name << " because it has no summary\n"
         end
     end
 
