@@ -2,7 +2,6 @@
 # vim: set sw=4 sts=4 et tw=80 :
 
 require 'summer/templated_page'
-require 'summer/columnify'
 
 class CategoryPage < TemplatedPage
     def initialize cat_name
@@ -21,7 +20,6 @@ class CategoryPage < TemplatedPage
 
     def self.get_template_variables_hash
         {
-            :columnify           => :columnify,
             :package_href        => :make_package_href,
             :package_names       => :package_names,
             :package_summary     => :make_package_summary
@@ -38,10 +36,6 @@ class CategoryPage < TemplatedPage
 
     def add_id id
         (@packages[id.name] ||= []) << id
-    end
-
-    def columnify data, cols
-        return Summer::columnify data, cols
     end
 
     def make_package_href name
