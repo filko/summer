@@ -371,16 +371,10 @@ class RepositoryPage < ChildPage
         keys.sort_by do | key |
             key.human_name
         end.each do | key |
-            next unless %w{format sync}.include? key.human_name
+            next unless key.type == MetadataKeyType::Significant
+            next if %w{location}.include? key.human_name
 
-            case key.type
-            when MetadataKeyType::Internal
-                next
-            when MetadataKeyType::Significant
-                txt << html("<dt class='significant'>") << key.human_name << html("</dt>")
-            else
-                txt << html("<dt>") << key.human_name << html("</dt>")
-            end
+            txt << html("<dt>") << key.human_name << html("</dt>")
 
             case key
             when MetadataStringKey
