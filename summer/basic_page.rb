@@ -88,10 +88,7 @@ class BasicPage
             first = s
         end
 
-        case first
-        when nil
-            spec
-        when AllDepSpec
+        if spec.kind_of? AllDepSpec
             skip_boring_specs first
         else
             first
@@ -112,6 +109,8 @@ class BasicPage
             lambda do | recurse, value, indent |
                 result << indent
                 case value
+                when nil
+                    # might've been normalised to nothing
                 when AllDepSpec
                     result << "( <br />"
                     value.each do | child |
