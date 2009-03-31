@@ -83,6 +83,7 @@ span.unsupported {
 table.links-list * td {
     white-space: nowrap;
     padding: 0.2em 0.5em;
+    width: 25%;
 }
 
 table.links-list {
