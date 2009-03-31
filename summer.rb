@@ -40,6 +40,18 @@ puts
 index_page = IndexPage.new
 repository_pages, category_pages, package_pages = {}, {}, {}
 
+print "Collecting repository information"
+
+repos.each do | repo |
+    print "."
+    $stdout.flush
+
+    index_page.add_repository repo
+    repository_pages[repo.name] = RepositoryPage.new(repo)
+end
+
+puts
+
 print "Collecting ID information"
 
 ids.each do | id |
@@ -55,19 +67,10 @@ ids.each do | id |
     package_pages[id.name].add_id id
     repos.each do | repo |
         package_pages[id.name].add_repository repo
+        if repo.name == id.repository_name
+            repository_pages[repo.name].add_id id
+        end
     end
-end
-
-puts
-
-print "Collecting repository information"
-
-repos.each do | repo |
-    print "."
-    $stdout.flush
-
-    index_page.add_repository repo
-    repository_pages[repo.name] = RepositoryPage.new(repo)
 end
 
 puts

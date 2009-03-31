@@ -13,3 +13,14 @@
     <% end %>
 </table>
 
+<h2>Packages</h2>
+
+<table class="packages">
+    <% package_names.each do | package_name | %>
+        <tr>
+            <th><a href="<%=h package_href(package_name) %>"><%=h package_name %></a></th>
+            <td><%=h package_summary(package_name) %></td>
+        </tr>
+    <% end %>
+</table>
+

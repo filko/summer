@@ -7,10 +7,15 @@ class RepositoryPage < TemplatedPage
     def initialize repo
         super "repositories/" + repo.name
         @repository = repo
+        @packages = {}
     end
 
     def page_title
         return @repository.name
+    end
+
+    def add_id id
+        (@packages[id.name] ||= []) << id
     end
 
     def self.content_template_filename
@@ -21,7 +26,10 @@ class RepositoryPage < TemplatedPage
         {
             :metadata_keys             => :get_interesting_metadata_keys,
             :summary                   => :get_summary_key_value,
-            :key_value                 => :metadata_key_value_to_html
+            :key_value                 => :metadata_key_value_to_html,
+            :package_names             => :get_package_names,
+            :package_href              => :make_package_href,
+            :package_summary           => :make_package_summary
         }
     end
 
@@ -52,6 +60,29 @@ class RepositoryPage < TemplatedPage
             @repository['summary'].value
         else
             nil
+        end
+    end
+
+    def get_package_names
+        @packages.keys.sort
+    end
+
+    def make_package_href name
+        return top_uri + "packages/" + name + "/index.html"
+    end
+
+    def make_package_summary name
+        best_id = best_id_for name
+        if best_id.short_description_key
+            best_id.short_description_key.value.sub(/\.$/, '')
+        else
+            name.to_s
+        end
+    end
+
+    def best_id_for name
+        @packages[name].max_by do | id |
+            [ id.version.is_scm? ? 0 : 1 , id.version ]
         end
     end
 end
