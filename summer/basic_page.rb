@@ -53,7 +53,7 @@ class BasicPage
             iv = "@cache_template_#{arg.to_s}".to_sym
             result = instance_variable_get iv
             unless result
-                File.open(arg.to_s + ".rhtml", "r") do | file |
+                File.open("summer/" + arg.to_s + ".rhtml", "r") do | file |
                     result = ERB.new(file.read)
                 end
                 instance_variable_set iv, result
