@@ -8,6 +8,7 @@ class CategoryPage < TemplatedPage
         super "packages/" + cat_name
         @cat_name = cat_name
         @packages = {}
+        @repositories = {}
     end
 
     def page_title
@@ -22,7 +23,11 @@ class CategoryPage < TemplatedPage
         {
             :package_href        => :make_package_href,
             :package_names       => :package_names,
-            :package_summary     => :make_package_summary
+            :package_summary     => :make_package_summary,
+            :repository_href     => :make_repository_href,
+            :repository_names    => :repository_names,
+            :repository_class    => :make_repository_class,
+            :repository_summary  => :make_repository_summary
         }
     end
 
@@ -36,6 +41,10 @@ class CategoryPage < TemplatedPage
 
     def add_id id
         (@packages[id.name] ||= []) << id
+    end
+
+    def add_repository repo
+        @repositories[repo.name] = repo
     end
 
     def make_package_href name
@@ -54,6 +63,46 @@ class CategoryPage < TemplatedPage
     def best_id_for name
         @packages[name].max_by do | id |
             [ id.version.is_scm? ? 0 : 1 , id.version ]
+        end
+    end
+
+    def repository_names
+        @repositories.keys.sort_by do | repo_name |
+            [ @repositories[repo_name]['status'] && @repositories[repo_name]['status'].value == "core" ? 0 : 1,
+                repo_name ]
+        end
+    end
+
+    def make_repository_href repo_name
+        return top_uri + "repositories/" + repo_name + "/index.html"
+    end
+
+    def make_category_href cat_name
+        return top_uri + "packages/" + cat_name + "/index.html"
+    end
+
+    def make_repository_summary repo_name
+        repo = @repositories[repo_name]
+        summary_key = repo['summary']
+        if summary_key
+            status_key = repo['status']
+            if status_key
+                summary_key.value + " (" + status_key.value + ")"
+            else
+                summary_key.value
+            end
+        else
+            "The #{repo_name} repository"
+        end
+    end
+
+    def make_repository_class repo_name
+        repo = @repositories[repo_name]
+        status_key = repo['status']
+        if status_key
+            "repo-status-" + status_key.value
+        else
+            ""
         end
     end
 end

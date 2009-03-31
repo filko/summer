@@ -93,6 +93,10 @@ table.packages * th {
     white-space: nowrap;
 }
 
+table.repositories * th {
+    white-space: nowrap;
+}
+
 table.metadata * th {
     white-space: nowrap;
 }
@@ -102,10 +106,22 @@ th {
 }
 
 .repo-status-core {
+    font-style: normal;
     font-weight: bold;
 }
 
 .repo-status-third-party {
     font-style: italic;
+    font-weight: normal;
+}
+
+.repo-status-experimental {
+    font-style: oblique;
+    font-weight: normal;
+}
+
+.repo-status-dev {
+    font-style: normal;
+    font-weight: normal;
 }
 

@@ -12,3 +12,18 @@
     <% end %>
 </table>
 
+<h2>Repositories</h2>
+
+<table class="repositories">
+    <% repository_names.each do | repo_name | %>
+        <tr>
+            <th><a
+                    href="<%=h repository_href(repo_name) %>"
+                    title="<%=h repository_summary(repo_name) %>"
+                    class="<%=h repository_class(repo_name) %>"><%=h repo_name %></a>
+            </th>
+            <td><%=h repository_summary(repo_name) %></td>
+        </tr>
+    <% end %>
+</table>
+

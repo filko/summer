@@ -70,6 +70,7 @@ ids.each do | id |
     repos.each do | repo |
         package_pages[id.name].add_repository repo
         if repo.name == id.repository_name
+            category_pages[id.name.category].add_repository repo
             repository_pages[repo.name].add_id id
         end
     end
