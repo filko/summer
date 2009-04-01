@@ -2,10 +2,11 @@
 # vim: set sw=4 sts=4 et tw=80 :
 
 require 'summer/templated_page'
-require 'summer/repository_summary.rb'
+require 'summer/repository_names.rb'
 
 class CategoryPage < TemplatedPage
     include Summer::RepositorySummary
+    include Summer::RepositoryNames
 
     def initialize cat_name
         super "packages/" + cat_name
@@ -66,13 +67,6 @@ class CategoryPage < TemplatedPage
     def best_id_for name
         @packages[name].max_by do | id |
             [ id.version.is_scm? ? 0 : 1 , id.version ]
-        end
-    end
-
-    def repository_names
-        @repositories.keys.sort_by do | repo_name |
-            [ @repositories[repo_name]['status'] && @repositories[repo_name]['status'].value == "core" ? 0 : 1,
-                repo_name ]
         end
     end
 

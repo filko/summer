@@ -4,9 +4,11 @@
 require 'summer/templated_page'
 require 'summer/columnify'
 require 'summer/repository_summary.rb'
+require 'summer/repository_names.rb'
 
 class IndexPage < TemplatedPage
     include Summer::RepositorySummary
+    include Summer::RepositoryNames
 
     def initialize
         super ""
@@ -36,13 +38,6 @@ class IndexPage < TemplatedPage
 
     def top_uri
         return ""
-    end
-
-    def repository_names
-        @repositories.keys.sort_by do | repo_name |
-            [ @repositories[repo_name]['status'] && @repositories[repo_name]['status'].value == "core" ? 0 : 1,
-                repo_name ]
-        end
     end
 
     def add_repository repo
