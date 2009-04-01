@@ -2,8 +2,11 @@
 # vim: set sw=4 sts=4 et tw=80 :
 
 require 'summer/templated_page'
+require 'summer/repository_summary'
 
 class PackagePage < TemplatedPage
+    include Summer::RepositorySummary
+
     def initialize pkg_name
         super "packages/" + pkg_name
         @pkg_name = pkg_name
@@ -31,7 +34,7 @@ class PackagePage < TemplatedPage
             :platform_class        => :make_platform_class,
             :platform_text         => :get_platform_text,
             :repository_href       => :make_repository_href,
-            :repository_summary    => :make_repository_summary,
+            :repository_summary    => :make_repository_summary_by_id,
             :repository_class      => :make_repository_class,
             :metadata_keys         => :get_interesting_metadata_keys,
             :key_value             => :metadata_key_value_to_html,
@@ -114,19 +117,8 @@ class PackagePage < TemplatedPage
         return top_uri + "repositories/" + id.repository_name + "/index.html"
     end
 
-    def make_repository_summary id
-        repo = @repositories[id.repository_name]
-        summary_key = repo['summary']
-        if summary_key
-            status_key = repo['status']
-            if status_key
-                summary_key.value + " (" + status_key.value + ")"
-            else
-                summary_key.value
-            end
-        else
-            "The #{id.repository_name} repository"
-        end
+    def make_repository_summary_by_id id
+        make_repository_summary id.repository_name
     end
 
     def make_repository_class id

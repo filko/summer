@@ -3,8 +3,11 @@
 
 require 'summer/templated_page'
 require 'summer/columnify'
+require 'summer/repository_summary.rb'
 
 class IndexPage < TemplatedPage
+    include Summer::RepositorySummary
+
     def initialize
         super ""
         @repositories = {}
@@ -64,21 +67,6 @@ class IndexPage < TemplatedPage
 
     def make_category_href cat_name
         return top_uri + "packages/" + cat_name + "/index.html"
-    end
-
-    def make_repository_summary repo_name
-        repo = @repositories[repo_name]
-        summary_key = repo['summary']
-        if summary_key
-            status_key = repo['status']
-            if status_key
-                summary_key.value + " (" + status_key.value + ")"
-            else
-                summary_key.value
-            end
-        else
-            "The #{repo_name} repository"
-        end
     end
 
     def make_repository_class repo_name
