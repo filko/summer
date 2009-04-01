@@ -2,8 +2,11 @@
 # vim: set sw=4 sts=4 et tw=80 :
 
 require 'summer/templated_page'
+require 'summer/package_common.rb'
 
 class RepositoryPage < TemplatedPage
+    include Summer::PackageCommon
+
     def initialize repo
         super "repositories/" + repo.name
         @repository = repo
@@ -65,25 +68,6 @@ class RepositoryPage < TemplatedPage
 
     def get_package_names
         @packages.keys.sort
-    end
-
-    def make_package_href name
-        return top_uri + "packages/" + name + "/index.html"
-    end
-
-    def make_package_summary name
-        best_id = best_id_for name
-        if best_id.short_description_key
-            best_id.short_description_key.value.sub(/\.$/, '')
-        else
-            name.to_s
-        end
-    end
-
-    def best_id_for name
-        @packages[name].max_by do | id |
-            [ id.version.is_scm? ? 0 : 1 , id.version ]
-        end
     end
 end
 

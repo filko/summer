@@ -4,11 +4,11 @@
 require 'summer/templated_page'
 require 'summer/columnify'
 require 'summer/repository_summary.rb'
-require 'summer/repository_names.rb'
+require 'summer/repository_common.rb'
 
 class IndexPage < TemplatedPage
     include Summer::RepositorySummary
-    include Summer::RepositoryNames
+    include Summer::RepositoryCommon
 
     def initialize
         super ""
@@ -29,11 +29,7 @@ class IndexPage < TemplatedPage
             :category_href       => :make_category_href,
             :category_names      => :category_names,
             :columnify           => :columnify,
-            :repository_href     => :make_repository_href,
-            :repository_names    => :repository_names,
-            :repository_class    => :make_repository_class,
-            :repository_summary  => :make_repository_summary
-        }
+        }.merge(Summer::RepositoryCommon.get_template_variables_hash)
     end
 
     def top_uri
@@ -54,24 +50,6 @@ class IndexPage < TemplatedPage
 
     def columnify data, cols
         return Summer::columnify data, cols
-    end
-
-    def make_repository_href repo_name
-        return top_uri + "repositories/" + repo_name + "/index.html"
-    end
-
-    def make_category_href cat_name
-        return top_uri + "packages/" + cat_name + "/index.html"
-    end
-
-    def make_repository_class repo_name
-        repo = @repositories[repo_name]
-        status_key = repo['status']
-        if status_key
-            "repo-status-" + status_key.value
-        else
-            ""
-        end
     end
 end
 

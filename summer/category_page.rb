@@ -2,11 +2,14 @@
 # vim: set sw=4 sts=4 et tw=80 :
 
 require 'summer/templated_page'
-require 'summer/repository_names.rb'
+require 'summer/repository_summary.rb'
+require 'summer/repository_common.rb'
+require 'summer/package_common.rb'
 
 class CategoryPage < TemplatedPage
     include Summer::RepositorySummary
-    include Summer::RepositoryNames
+    include Summer::RepositoryCommon
+    include Summer::PackageCommon
 
     def initialize cat_name
         super "packages/" + cat_name
@@ -28,11 +31,7 @@ class CategoryPage < TemplatedPage
             :package_href        => :make_package_href,
             :package_names       => :package_names,
             :package_summary     => :make_package_summary,
-            :repository_href     => :make_repository_href,
-            :repository_names    => :repository_names,
-            :repository_class    => :make_repository_class,
-            :repository_summary  => :make_repository_summary
-        }
+        }.merge(Summer::RepositoryCommon.get_template_variables_hash)
     end
 
     def top_uri
@@ -49,43 +48,6 @@ class CategoryPage < TemplatedPage
 
     def add_repository repo
         @repositories[repo.name] = repo
-    end
-
-    def make_package_href name
-        return top_uri + "packages/" + name + "/index.html"
-    end
-
-    def make_package_summary name
-        best_id = best_id_for name
-        if best_id.short_description_key
-            best_id.short_description_key.value.sub(/\.$/, '')
-        else
-            name.to_s
-        end
-    end
-
-    def best_id_for name
-        @packages[name].max_by do | id |
-            [ id.version.is_scm? ? 0 : 1 , id.version ]
-        end
-    end
-
-    def make_repository_href repo_name
-        return top_uri + "repositories/" + repo_name + "/index.html"
-    end
-
-    def make_category_href cat_name
-        return top_uri + "packages/" + cat_name + "/index.html"
-    end
-
-    def make_repository_class repo_name
-        repo = @repositories[repo_name]
-        status_key = repo['status']
-        if status_key
-            "repo-status-" + status_key.value
-        else
-            ""
-        end
     end
 end
 
