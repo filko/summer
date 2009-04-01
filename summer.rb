@@ -14,7 +14,7 @@ OutputDir = "./output/"
 ExtraFiles = %w[screen.css summer.css zebrapig-headbox.png]
 Platforms = %w[amd64 ia64 ppc64 x86]
 
-def find_elibible_ids_and_repos env
+def find_eligible_ids_and_repos env
     # Only consider repositories that have a summary, or that are fancy.
     repos = []
     env.package_database.repositories.each do | repo |
@@ -36,7 +36,7 @@ end
 env = EnvironmentFactory.instance.create(EnvironmentSpec)
 
 print "Querying"
-ids, repos = find_elibible_ids_and_repos(env)
+ids, repos = find_eligible_ids_and_repos(env)
 puts
 
 index_page = IndexPage.new
