@@ -10,3 +10,13 @@ if not Array.respond_to? :max_by
     end
 end
 
+# since ruby 1.9
+unless Object.respond_to? :tap
+    class Object
+        def tap
+            yield self
+            self
+        end
+    end
+end
+
