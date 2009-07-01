@@ -5,4 +5,4 @@ clean :
 	rm -fr output/
 
 upload :
-	rsync --recursive --verbose --progress output/./ dev.exherbo.org:public_html/summer/./ -c --delete-after
+	rsync --recursive --verbose --progress output/./ /var/www/localhost/htdocs/summer/./ -c --delete-after
