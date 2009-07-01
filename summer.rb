@@ -5,6 +5,7 @@ require 'summer/index_page'
 require 'summer/repository_page'
 require 'summer/category_page'
 require 'summer/package_page'
+require 'summer/legacy'
 require 'Paludis'
 
 include Paludis
