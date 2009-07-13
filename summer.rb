@@ -13,7 +13,7 @@ include Paludis
 EnvironmentSpec = ":summer"
 OutputDir = "./output/"
 ExtraFiles = %w[screen.css summer.css zebrapig-headbox.png]
-Platforms = %w[amd64 ia64 ppc64 x86]
+Platforms = %w[amd64 arm ia64 ppc64 x86]
 
 def find_eligible_ids_and_repos env
     # Only consider repositories that have a summary, or that are fancy.
