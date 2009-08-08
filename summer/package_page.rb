@@ -171,6 +171,8 @@ class PackagePage < TemplatedPage
         case key.type
         when MetadataKeyType::Significant, MetadataKeyType::Normal, MetadataKeyType::Dependencies
             not key.raw_name == id.choices_key.raw_name
+        when MetadataKeyType::Internal
+            key.raw_name == "LICENCES"
         else
             false
         end

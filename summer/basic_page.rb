@@ -100,7 +100,7 @@ class BasicPage
             escape_html(key.value.join(', '))
 
         when MetadataSimpleURISpecTreeKey, MetadataDependencySpecTreeKey, MetadataFetchableURISpecTreeKey,
-                MetadataPlainTextSpecTreeKey
+                MetadataPlainTextSpecTreeKey, MetadataLicenseSpecTreeKey
             result = ""
             lambda do | recurse, value, indent |
                 result << indent
@@ -141,7 +141,7 @@ class BasicPage
                         escape_html(value.to_s) << "</a> "
 
                 when PlainTextDepSpec, URILabelsDepSpec, PlainTextLabelDepSpec, DependencyLabelsDepSpec,
-                    BlockDepSpec
+                    BlockDepSpec, LicenseDepSpec
                     result << value.to_s << " "
 
                 else
