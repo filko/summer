@@ -148,6 +148,18 @@ class BasicPage
                     $stderr << "unsupported spec tree thing: " << value.class << "\n"
                     result << "<span class='unsupported'>" << escape_html(value.to_s) << "</span>"
                 end
+
+                if value.respond_to? :annotations_key and value.annotations_key
+                    first = true
+                    value.annotations_key.each_metadata do | child |
+                        result << " [[<br />" if first
+                        first = false
+                        result << indent << " &nbsp; &nbsp; " << escape_html(child.raw_name) <<
+                            " = [ " << escape_html(child.value) << " ]<br />"
+                    end
+                    result << indent << "]]" unless first
+                end
+
                 result << "<br />"
             end.tap do | x |
                 x.call(x, skip_boring_specs(key.value), "")
