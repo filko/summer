@@ -21,5 +21,9 @@ module Summer
                 [ id.version.is_scm? ? 0 : 1 , id.version ]
             end
         end
+
+        def make_repository_href name
+            return top_uri + "repositories/" + name + "/index.html"
+        end
     end
 end

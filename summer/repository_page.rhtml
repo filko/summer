@@ -2,6 +2,16 @@
     <p><%=h summary %>.</p>
 <% end %>
 
+<% unless masters.empty? %>
+    <h2>Masters</h2>
+
+    <ul>
+        <% masters.each do | master | %>
+            <li><a href="<%=h repository_href(master) %>"><%=h master %></a></li>
+        <% end %>
+    </ul>
+<% end %>
+
 <h2>Metadata</h2>
 
 <table class="metadata">

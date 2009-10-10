@@ -28,11 +28,13 @@ class RepositoryPage < TemplatedPage
     def self.get_template_variables_hash
         {
             :metadata_keys             => :get_interesting_metadata_keys,
+            :masters                   => :get_masters,
             :summary                   => :get_summary_key_value,
             :key_value                 => :metadata_key_value_to_html,
             :package_names             => :get_package_names,
             :package_href              => :make_package_href,
-            :package_summary           => :make_package_summary
+            :package_summary           => :make_package_summary,
+            :repository_href           => :make_repository_href
         }
     end
 
@@ -55,6 +57,14 @@ class RepositoryPage < TemplatedPage
         end
         result.sort_by do | key |
             [ key.type, key.human_name ]
+        end
+    end
+
+    def get_masters
+        if @repository['master_repository']
+            @repository['master_repository'].value
+        else
+            []
         end
     end
 
