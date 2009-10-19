@@ -49,7 +49,7 @@ class IndexPage < TemplatedPage
     end
 
     def columnify data, cols
-        return Summer::columnify data, cols
+        return Summer::columnify(data, cols)
     end
 end
 
