@@ -140,7 +140,7 @@ class BasicPage
                     result << "<a href='" << top_uri << "packages/" << escape_html(value.package) << "/index.html'>" <<
                         escape_html(value.to_s) << "</a> "
 
-                when PlainTextDepSpec, URILabelsDepSpec, PlainTextLabelDepSpec, DependencyLabelsDepSpec,
+                when PlainTextDepSpec, URILabelsDepSpec, PlainTextLabelDepSpec, DependenciesLabelsDepSpec,
                     BlockDepSpec, LicenseDepSpec
                     result << value.to_s << " "
 
