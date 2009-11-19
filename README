@@ -25,4 +25,15 @@ Wish list:
 
 * Link to the category from package pages.
 
+* Track QA issues
+ - Non-existant licences
+ - Empty SUMMARY
+ - Empty option descriptions
+ - Suboptions that aren't suboptions (e.g. platform:x86 in MYOPTIONS)
+ - Dependencies that don't exist (people should use ::unwritten)
+ - RESTRICT values that don't exist
+ - Patches that aren't either format-patches or has our patch headers
+ - DOWNLOADS pulling from gitweb
+ - Packages in multiple repositories
+
 # vim: set tw=80 spell spelllang=en :
