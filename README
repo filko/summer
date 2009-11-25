@@ -36,4 +36,6 @@ Wish list:
  - DOWNLOADS pulling from gitweb
  - Packages in multiple repositories
 
+* Show repository-defined sets.
+
 # vim: set tw=80 spell spelllang=en :
