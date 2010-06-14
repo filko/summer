@@ -5,7 +5,7 @@ html {
   background-image: url('zebrapig-headbox.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: top right;
+  background-position: bottom right;
 }
 
 div#body {
@@ -22,6 +22,7 @@ div#body * a:hover {
 
 div#searchbox {
     float: right;
+    margin-right: 3em;
 }
 
 table.versions {

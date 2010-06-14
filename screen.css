@@ -14,7 +14,7 @@ html {
   background-image: url('zebrapig-translucent.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: top right;
+  background-position: bottom right;
 }
 
 body {
@@ -25,8 +25,11 @@ body {
 #head {
   background-color: white;
   border: thin solid white;
-  border-bottom: medium solid #006600;
-  margin: -1%;
+  background-image: url(bg-left.png), url(bg-right.png), url(bg.png);
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-position: top left, top right, top left;
+  padding-top: 1.7em;
+  padding-left: 3em;
 }
 
 #head li {
