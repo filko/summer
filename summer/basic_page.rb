@@ -99,6 +99,9 @@ class BasicPage
         when MetadataStringSetKey, MetadataStringSequenceKey
             escape_html(key.value.join(', '))
 
+        when MetadataStringStringMapKey
+            escape_html(key.value.map { | k, v | k + (k.empty? ? "" : ": ") + v }.join(" "))
+
         when MetadataSimpleURISpecTreeKey, MetadataDependencySpecTreeKey, MetadataFetchableURISpecTreeKey,
                 MetadataPlainTextSpecTreeKey, MetadataLicenseSpecTreeKey
             result = ""
