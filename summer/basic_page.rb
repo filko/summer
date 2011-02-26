@@ -136,7 +136,7 @@ class BasicPage
                         "</a> "
 
                 when FetchableURIDepSpec
-                    result << "<a href='http://distfiles.exherbo.org/" << escape_html(value.filename) <<
+                    result << "<a href='http://distfiles.exherbo.org/distfiles/" << escape_html(value.filename) <<
                         "'>" << escape_html(value.text) << "</a> "
 
                 when PackageDepSpec
