@@ -18,7 +18,7 @@ Platforms = %w[amd64 arm ia64 ppc64 x86]
 def find_eligible_ids_and_repos env
     # Only consider repositories that have a summary, or that are fancy.
     repos = []
-    env.package_database.repositories.each do | repo |
+    env.repositories.each do | repo |
         if repo['summary'] or repo['format'].value == "unwritten"
             repos << repo
         else
