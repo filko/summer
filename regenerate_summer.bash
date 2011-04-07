@@ -21,7 +21,7 @@ die() {
 
 cd ~/summer.git &>>"${LOG}" || die "Entering summer.git failed"
 make clean &>>"${LOG}" || die "make clean failed"
-make &>>"${LOG}" || die "make failed"
+ulimit -c unlimited && make &>>"${LOG}" || die "make failed"
 make upload &>>"${LOG}" || die "make upload failed"
 
 [[ -n ${ALWAYS_SENDMAIL} ]] && mail "Success: Summer regeneration ${run_date}" "${LOG}"
