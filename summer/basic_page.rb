@@ -94,13 +94,13 @@ class BasicPage
     def metadata_key_value_to_html key
         case key
         when MetadataStringKey
-            escape_html(key.value)
+            escape_html(key.parse_value)
 
         when MetadataStringSetKey, MetadataStringSequenceKey
-            escape_html(key.value.join(', '))
+            escape_html(key.parse_value.join(', '))
 
         when MetadataStringStringMapKey
-            escape_html(key.value.map { | k, v | k + (k.empty? ? "" : ": ") + v }.join(" "))
+            escape_html(key.parse_value.map { | k, v | k + (k.empty? ? "" : ": ") + v }.join(" "))
 
         when MetadataSimpleURISpecTreeKey, MetadataDependencySpecTreeKey, MetadataFetchableURISpecTreeKey,
                 MetadataPlainTextSpecTreeKey, MetadataLicenseSpecTreeKey
@@ -165,7 +165,7 @@ class BasicPage
 
                 result << "<br />"
             end.tap do | x |
-                x.call(x, skip_boring_specs(key.value), "")
+                x.call(x, skip_boring_specs(key.parse_value), "")
             end
 
             result.sub(%r[<br />$], '')

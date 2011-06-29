@@ -19,7 +19,7 @@ def find_eligible_ids_and_repos env
     # Only consider repositories that have a summary, or that are fancy.
     repos = []
     env.repositories.each do | repo |
-        if repo['summary'] or repo['format'].value == "unwritten"
+        if repo['summary'] or repo['format'].parse_value == "unwritten"
             repos << repo
         else
             $stderr << "Eek. Skipping repository " << repo.name << " because it has no summary\n"

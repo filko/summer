@@ -5,7 +5,7 @@ module Summer
     module RepositoryCommon
         def repository_names
             @repositories.keys.sort_by do | repo_name |
-                [ @repositories[repo_name]['status'] && @repositories[repo_name]['status'].value == "core" ? 0 : 1,
+                [ @repositories[repo_name]['status'] && @repositories[repo_name]['status'].parse_value == "core" ? 0 : 1,
                     repo_name ]
             end
         end
@@ -14,7 +14,7 @@ module Summer
             repo = @repositories[repo_name]
             status_key = repo['status']
             if status_key
-                "repo-status-" + status_key.value
+                "repo-status-" + status_key.parse_value
             else
                 ""
             end

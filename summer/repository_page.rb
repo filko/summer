@@ -62,7 +62,7 @@ class RepositoryPage < TemplatedPage
 
     def get_masters
         if @repository['master_repository']
-            @repository['master_repository'].value
+            @repository['master_repository'].parse_value
         else
             []
         end
@@ -70,7 +70,7 @@ class RepositoryPage < TemplatedPage
 
     def get_summary_key_value
         if @repository['summary']
-            @repository['summary'].value
+            @repository['summary'].parse_value
         else
             nil
         end

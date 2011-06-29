@@ -9,9 +9,9 @@ module Summer
             if summary_key
                 status_key = repo['status']
                 if status_key
-                    summary_key.value + " (" + status_key.value + ")"
+                    summary_key.parse_value + " (" + status_key.parse_value + ")"
                 else
-                    summary_key.value
+                    summary_key.parse_value
                 end
             else
                 "The #{repo_name} repository"

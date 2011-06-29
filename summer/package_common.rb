@@ -10,7 +10,7 @@ module Summer
         def make_package_summary name
             best_id = best_id_for name
             if best_id.short_description_key
-                best_id.short_description_key.value.sub(/\.$/, '')
+                best_id.short_description_key.parse_value.sub(/\.$/, '')
             else
                 name.to_s
             end

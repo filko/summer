@@ -61,7 +61,7 @@ class PackagePage < TemplatedPage
     def make_summary
         best_id = get_best_id
         if best_id.short_description_key
-            best_id.short_description_key.value.sub(/\.$/, '')
+            best_id.short_description_key.parse_value.sub(/\.$/, '')
         else
             @pkg_name.to_s
         end
@@ -79,7 +79,7 @@ class PackagePage < TemplatedPage
 
     def get_id_slot id
         if id.slot_key
-            id.slot_key.value
+            id.slot_key.parse_value
         else
             "?"
         end
@@ -125,7 +125,7 @@ class PackagePage < TemplatedPage
         repo = @repositories[id.repository_name]
         status_key = repo['status']
         if status_key
-            "repo-status-" + status_key.value
+            "repo-status-" + status_key.parse_value
         else
             ""
         end
@@ -141,13 +141,13 @@ class PackagePage < TemplatedPage
 
     def get_platform_text id, platform
         return platform + "?" unless id.keywords_key
-        if id.keywords_key.value.include? platform
+        if id.keywords_key.parse_value.include? platform
             return platform
-        elsif id.keywords_key.value.include?("~" + platform)
+        elsif id.keywords_key.parse_value.include?("~" + platform)
             return "~" + platform
-        elsif id.keywords_key.value.include?("-*")
+        elsif id.keywords_key.parse_value.include?("-*")
             return "-*"
-        elsif id.keywords_key.value.include?("-" + platform)
+        elsif id.keywords_key.parse_value.include?("-" + platform)
             return "-" + platform
         else
             return platform + "?"
@@ -156,11 +156,11 @@ class PackagePage < TemplatedPage
 
     def make_platform_class id, platform
         return "platform-unkeyworded" unless id.keywords_key
-        if id.keywords_key.value.include? platform
+        if id.keywords_key.parse_value.include? platform
             return "platform-stable"
-        elsif id.keywords_key.value.include?("~" + platform)
+        elsif id.keywords_key.parse_value.include?("~" + platform)
             return "platform-unstable"
-        elsif id.keywords_key.value.include?("-*") or id.keywords_key.value.include?("-" + platform)
+        elsif id.keywords_key.parse_value.include?("-*") or id.keywords_key.parse_value.include?("-" + platform)
             return "platform-disabled"
         else
             return "platform-unkeyworded"
@@ -194,7 +194,7 @@ class PackagePage < TemplatedPage
         result = []
 
         if id.choices_key
-            id.choices_key.value.each do | choice |
+            id.choices_key.parse_value.each do | choice |
                 next if choice.hidden?
                 next if choice.human_name == "Build Options"
 
