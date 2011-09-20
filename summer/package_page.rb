@@ -200,7 +200,7 @@ class PackagePage < TemplatedPage
 
                 c = [ choice, [] ]
                 choice.each do | value |
-                    next unless value.explicitly_listed?
+                    next unless value.origin == ChoiceOrigin::Explicit
                     c.last << value
                 end
                 result << c unless c.last.empty?
