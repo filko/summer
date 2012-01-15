@@ -10,7 +10,7 @@ fi
 mail() {
     local subject="${1}" body="${2}"
     HOME="/tmp" LANG="en_GB.utf8" EMAIL="Statically Updated Metadata Manifestation for Exherbo Repositories <summer@git.exherbo.org>" \
-        mutt -s '${subject}' -- ${RECIPIENTS}
+        mutt -s "${subject}" -- ${RECIPIENTS} < "${body}"
 }
 
 die() {
