@@ -1,5 +1,5 @@
 all :
-	ruby summer.rb
+	ruby -I./ summer.rb
 
 clean :
 	rm -fr output/
