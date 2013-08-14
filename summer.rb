@@ -1,6 +1,8 @@
 #!/usr/bin/ruby
 # vim: set sw=4 sts=4 et tw=80 :
 
+require 'getoptlong'
+
 require 'summer/index_page'
 require 'summer/repository_page'
 require 'summer/category_page'
@@ -10,10 +12,31 @@ require 'Paludis'
 
 include Paludis
 
-EnvironmentSpec = ":summer"
+envspec = ":summer"
 OutputDir = "./output/"
 ExtraFiles = %w[screen.css summer.css zebrapig-headbox.png bg.png bg-left.png bg-right.png]
 Platforms = %w[amd64 arm ia64 ppc64 x86]
+
+GetoptLong.new(
+    [ '--log-level',         GetoptLong::REQUIRED_ARGUMENT ],
+    [ '--environment', '-E', GetoptLong::REQUIRED_ARGUMENT ]
+).each do | opt, arg |
+    case opt
+
+    when '--log-level'
+        Paludis::Log.instance.log_level = case arg
+            when 'silent'  then  Paludis::LogLevel::Silent
+            when 'warning' then  Paludis::LogLevel::Warning
+            when 'qa'      then  Paludis::LogLevel::Qa
+            when 'debug'   then  Paludis::LogLevel::Debug
+            else die "invalid #{opt}: #{arg}"
+        end
+
+    when '--environment'
+        envspec = arg
+    end
+end
+
 
 def find_eligible_ids_and_repos env
     # Only consider repositories that have a summary, or that are fancy.
@@ -34,7 +57,7 @@ def find_eligible_ids_and_repos env
     [ ids, repos ]
 end
 
-env = EnvironmentFactory.instance.create(EnvironmentSpec)
+env = EnvironmentFactory.instance.create(envspec)
 
 print "Querying"
 ids, repos = find_eligible_ids_and_repos(env)
