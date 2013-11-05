@@ -6,12 +6,14 @@ require 'summer/methods_from_instance_methods'
 require 'summer/method_maker'
 require 'pathname'
 require 'erb'
+require 'set'
 
 class BasicPage
     def initialize name
         @name = name.to_s
         @dir = OutputDir + @name
         @filename = @dir + "/index.html"
+        @features = Set.new
     end
 
     abstract_method :page_title, :top_uri, :generate_content
@@ -31,14 +33,24 @@ class BasicPage
         self.class.escape_html *args
     end
 
+    def has_feature? arg
+      return @features.member? arg
+    end
+
+    def has_features? *args
+      return @features.superset? (Set.new args)
+    end
+
     def self.generate_part_method_1 arg
         send :define_method, "generate_#{arg.to_s}".to_sym do
             send("get_#{arg.to_s}_template".to_sym).result(
                 methods_from_instance_methods(self, {
                     :title => :page_title,
                     :top_uri => :top_uri,
-                    :h => :escape_html
-                }))
+                    :h => :escape_html,
+                    :feature? => :has_feature?,
+                    :features? => :has_features?
+                }.merge(self.class.get_template_variables_hash)))
         end
     end
 
