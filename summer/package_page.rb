@@ -12,6 +12,7 @@ class PackagePage < TemplatedPage
         @pkg_name = pkg_name
         @ids = []
         @repositories = {}
+        @features.add :twitter
     end
 
     def page_title

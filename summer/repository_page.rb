@@ -11,6 +11,7 @@ class RepositoryPage < TemplatedPage
         super "repositories/" + repo.name
         @repository = repo
         @packages = {}
+        @features.add :twitter
     end
 
     def page_title
