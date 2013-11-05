@@ -9,15 +9,13 @@ class TemplatedPage < BasicPage
     end
 
     def get_content_template
-        result = self.class.instance_variable_get :@content_template_cache
-        unless result
-            filename = self.class.content_template_filename
-            File.open(filename, "r") do | file |
-                result = ERB.new(file.read)
-            end
-            self.class.instance_variable_set :@content_template_cache, result
-        end
-        result
+      filename = self.class.content_template_filename
+      result = nil
+      return @@templates[filename] if @@templates.has_key? filename
+      File.open(filename, "r") do | file |
+        result = ERB.new(file.read)
+      end
+      @@templates[filename] = result
     end
 
     def generate_content

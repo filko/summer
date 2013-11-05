@@ -14,6 +14,7 @@ class BasicPage
         @dir = OutputDir + @name
         @filename = @dir + "/index.html"
         @features = Set.new
+        @@templates = Hash.new unless defined? @@templates
     end
 
     abstract_method :page_title, :top_uri, :generate_content
@@ -61,17 +62,15 @@ class BasicPage
     end
 
     def self.cached_get_template_method_1 arg
-        self.class.send :define_method, "cached_get_#{arg.to_s}_template".to_sym do
-            iv = "@cache_template_#{arg.to_s}".to_sym
-            result = instance_variable_get iv
-            unless result
-                File.open("summer/" + arg.to_s + ".rhtml", "r") do | file |
-                    result = ERB.new(file.read)
-                end
-                instance_variable_set iv, result
-            end
-            result
+      self.class.send :define_method, "cached_get_#{arg.to_s}_template".to_sym do
+        filename = "summer/%s.rhtml"%(arg.to_s)
+        return @@templates[filename] if @@templates.has_key? filename
+        result = nil
+        File.open(filename, "r") do | file |
+          result = ERB.new(file.read)
         end
+        @@templates[filename] = result
+      end
     end
 
     [ :generate_part_method, :get_template_method, :cached_get_template_method ].each do | m |
