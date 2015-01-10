@@ -1,83 +1,49 @@
-html {
-  color: #333333;
-  background-color: white;
+@import url('//exherbo.org/style/main.css');
 
-  background-image: url('zebrapig-headbox.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: bottom right;
+@font-face {
+    font-family: "Distro";
+    src: url("distro_bold-webfont.eot");
+    src: url("distro_bold-webfont.eot?#iefix") format("embedded-opentype"),
+         url("distro_bold-webfont.woff2") format("woff2"),
+         url("distro_bold-webfont.woff") format("woff"),
+         url("distro_bold-webfont.ttf") format("truetype"),
+         url("distro_bold-webfont.svg#distrobold") format("svg");
+    font-weight: normal;
+    font-style: normal;
 }
 
-div#body {
-    padding: 1em 1em;
+body {
+    background-image: url('zebrapig-headbox.png');
 }
 
-div#body * a:link, div#body * a:visited {
+body a:link {
     text-decoration: none;
 }
 
-div#body * a:hover {
-    text-decoration: underline;
-}
-
-div#searchbox {
-    float: right;
-    margin-right: 3em;
-}
-
-table.versions {
-    margin: 1em 4em 1em 0em;
-    border-spacing: 0px;
-    border: 1px solid #000000;
-}
-
-table.versions * th {
-    vertical-align: top;
-    text-align: center;
-    font-weight: bold;
-    padding: 0.2em 1em;
-    background-color: #99ff99;
-}
-
-table.versions * td {
-    vertical-align: top;
-    text-align: left;
-    padding: 0.2em 1em;
-    border-right: 1px solid #99ff99;
-}
-
-table.versions tr.newslot td, table.versions tr.newslot th {
-    border-top: 1px solid #000000;
-}
-
-table.versions tr.sameslot td, table.versions tr.sameslot th {
-    border-top: 1px solid #99ff99;
-}
-
-table.versions * td.best-id {
-    font-weight: bold;
+table.versions th:first-child,
+table.versions * th.newslot {
+    text-align: right;
 }
 
 table.versions * td.platform-stable {
     background-color: #99ff99;
-    border-right-style: none;
+    border-top-color: #a1da91 !important;
     font-weight: bold;
 }
 
 table.versions * td.platform-unstable {
-    background-color: #ccffcc;
-    border-right-style: none;
+    background-color: #dfffdf;
+    border-top-color: #a1da91 !important;
 }
 
 table.versions * td.platform-disabled {
-    background-color: #ffcccc;
-    border-right-style: none;
+    background-color: #ffd5d5;
+    border-top-color: #da9191 !important;
 }
 
 table.versions * td.platform-unkeyworded {
-    background-color: #cccccc;
-    border-right-style: none;
-    color: #999999;
+    background-color: #f2f2f2;
+    border-top-color: #dbdbdb !important;
 }
 
 span.unsupported {
@@ -88,11 +54,6 @@ span.unsupported {
 table.links-list * td {
     white-space: nowrap;
     padding: 0.2em 0.5em;
-    width: 25%;
-}
-
-table.links-list {
-    width: 80%;
 }
 
 table.packages * th {
@@ -131,3 +92,90 @@ th {
     font-weight: normal;
 }
 
+.navbar-form {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.searchbox {
+    width: 25rem !important;
+}
+
+table.links-list tr:first-child>td {
+    border-top: transparent;
+}
+
+@media (max-width: 992px) {
+    .searchbox {
+        width: 100% !important;
+    }
+
+    table.links-list tr:first-child>td {
+        border-top: 1px solid #ddd;
+    }
+
+    table.links-list tr:first-child>td:first-child {
+        border-top: transparent;
+    }
+
+    td {
+        display: block;
+        
+    }
+
+    table.links-list {
+        font-size: 28px;
+    }
+    
+}
+
+@media (max-width: 1199px) {
+    .platform-stable, .platform-unstable, .platform-disabled, .platform-unkeyworded {
+        display: table-cell !important;
+    }
+}
+
+@media (max-width: 992px) {
+    table.links-list>tr>td {
+        display: block;
+    }
+}
+
+@media not all and (max-width: 1199px) {
+    table.links-list tr:first-child>td {
+        border-top: transparent;
+    }
+}
+
+.table-responsive {
+    border: none !important;
+    overflow-y: hidden; /* why does this happen? */
+}
+
+table {
+    overflow-x: hidden;
+    border-spacing:0
+}
+
+.links-list td a:link {
+    display: block;
+    padding: 10em;
+    margin: -10em;
+}
+
+.links-list td a:hover {
+    background-color: #eee
+}
+
+.links-list td {
+    overflow: hidden;
+}
+
+td.best-id {
+    font-weight: bold;
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: bold;
+}

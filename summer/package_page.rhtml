@@ -4,52 +4,56 @@
 
 <h2>Versions</h2>
 
-<table class="versions">
-    <col width="2*" />
-    <col width="2*" />
-    <col width="3*" />
-    <col span="<%=h platforms.length %>" width="1*" />
+<div class='table-responsive'>
+    <table class="versions table">
+        <col width="2*" />
+        <col width="2*" />
+        <col width="3*" />
+        <col span="<%=h platforms.length %>" width="1*" />
 
-    <tr>
-        <th>Slot</th>
-        <th>Version</th>
-        <th>Repository</th>
-        <th colspan="<%=h platforms.length %>">Platforms</th>
-    </tr>
+        <tr>
+            <th>Slot</th>
+            <th>Version</th>
+            <th>Repository</th>
+            <th colspan="<%=h platforms.length %>">Platforms</th>
+        </tr>
 
-    <% ids_by_slot.each do | id_slot_group | %>
-        <% id_slot_group.each_with_index do | id, index | %>
-            <% if index == 0 %>
-                <tr class="newslot">
-                    <th rowspan="<%=h id_slot_group.length %>"><%=h slot(id) %></th>
-            <% else %>
-                <tr class="sameslot">
-            <% end %>
-
-                <td class="<%=h id_class(id) %>"><%=h version(id) %></td>
-                <td><a href="<%=h repository_href(id) %>"
-                        title="<%=h repository_summary(id) %>"
-                        class="<%=h repository_class(id) %>"><%=h repository(id) %></a></td>
-                <% platforms.each do | platform | %>
-                    <td class="<%=h platform_class(id, platform) %>"><%=h platform_text(id, platform) %></td>
+        <% ids_by_slot.each do | id_slot_group | %>
+            <% id_slot_group.each_with_index do | id, index | %>
+                <% if index == 0 %>
+                    <tr class="newslot">
+                        <th rowspan="<%=h id_slot_group.length %>"><%=h slot(id) %></th>
+                <% else %>
+                    <tr class="sameslot">
                 <% end %>
-            </tr>
+
+                    <td class="<%=h id_class(id) %>"><%=h version(id) %></td>
+                    <td><a href="<%=h repository_href(id) %>"
+                            title="<%=h repository_summary(id) %>"
+                            class="<%=h repository_class(id) %>"><%=h repository(id) %></a></td>
+                    <% platforms.each do | platform | %>
+                        <td class="<%=h platform_class(id, platform) %>"><%=h platform_text(id, platform) %></td>
+                    <% end %>
+                </tr>
+            <% end %>
         <% end %>
-    <% end %>
-</table>
+    </table>
+</div>
 
 <% unless metadata_keys.empty? %>
 
     <h2>Metadata</h2>
-
-    <table class="metadata">
-        <% metadata_keys.each do | key | %>
-            <tr>
-                <th><%=h key.human_name %></th>
-                <td><%=key_value key %></td>
-            </tr>
-        <% end %>
-    </table>
+    
+    <div class='table-responsive'>
+        <table class="metadata table">
+            <% metadata_keys.each do | key | %>
+                <tr>
+                    <th><%=h key.human_name %></th>
+                    <td><%=key_value key %></td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
 
 <% end %>
 
@@ -60,14 +64,16 @@
     <% choices.each do | choice | %>
         <h3><%=h choice_name(choice) %></h3>
 
-        <table class="choices">
-            <% choice_values(choice).each do | value | %>
-                <tr>
-                    <th><%=h choice_value_name(value) %></th>
-                    <td><%=h choice_value_desc(value) %></td>
-                </tr>
-            <% end %>
-        </table>
+        <div class='table-responsive'>
+            <table class="choices table">
+                <% choice_values(choice).each do | value | %>
+                    <tr>
+                        <th><%=h choice_value_name(value) %></th>
+                        <td><%=h choice_value_desc(value) %></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
     <% end %>
 
 <% end %>

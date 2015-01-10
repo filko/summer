@@ -1,11 +1,9 @@
-<?xml version="1.0"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>Exherbo: <%=h title %></title>
-
-        <link rel="stylesheet" type="text/css" href="<%= top_uri %>screen.css" />
         <link rel="stylesheet" type="text/css" href="<%= top_uri %>summer.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
 		<% if feature? :twitter %>
 		<meta name="twitter:card" content="summary"/>
@@ -16,18 +14,31 @@
 		<!-- <meta name="twitter:image" content=""> -->
 		<% end %>
     </head>
-    <body>
-        <div id="head">
-            <ul>
-                <li><a href="http://exherbo.org/">Exherbo</a></li>
-                <li><a href="<%= top_uri %>index.html">Summer</a></li>
-                <li><div id="searchbox"><form method="get" action="http://www.google.com/search">
-                        <div><input type="text" name="q" size="25" maxlength="255" value="" autofocus /></div>
-                        <div><input type="hidden" name="sitesearch" value="git.exherbo.org/summer" /></div>
-                    </form></div>
-                </li>
-            </ul>
-        </div>
+    <body><div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target="#collapse" data-toggle="collapse" type="button">
+                        <div class="fa fa-bars"></div>
+                    </button>
+                    <a class="navbar-brand distro" href="//exherbo.org/">
+                        <img alt="Zebrapig" class="zebrapig" src="//exherbo.org/style/zebrapig.png" title="I AM ZEBRAPIG" /> Exherbo
+                    </a>
+                </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <div class="nav navbar-nav navbar-left navbar-form">
+                    <form method="get" action="https://www.google.com/search">
+                        <input type="search" class="form-control searchbox" placeholder="Search for packages..." name="q" maxlength="255" autofocus />
+                        <input type="hidden" name="sitesearch" value="git.exherbo.org/summer" />
+                    </form>
+                </div>
+                <ul class="nav navbar-nav navbar-right navbar-links">
+                    <li><a href="http://git.exherbo.org/" title="Git repositories"><div class="fa fa-git"><!-- --></div><div class="visible-xs-inline"> Git</div></a></li>
+                    <li><a href="http://gerrit.exherbo.org/" title="Code review"><div class="fa fa-code"><!-- --></div> Gerrit</a></li>
+                    <li><a href="http://summer.exherbo.org/"><div class="fa fa-cubes"><!-- --></div> Packages</a></li>
+                </ul>
+            </div>
+        </nav>
 
         <div id="body">
             <h1><%=h title %></h1>

@@ -1,37 +1,51 @@
-<h2>Repositories</h2>
-
-<table class="links-list">
-    <% columnify(repository_names, 4).each do | row | %>
-        <tr>
-            <% row.each do | repo_name | %>
-                <% if repo_name %>
-                    <td><a
-                            href="<%=h repository_href(repo_name) %>"
-                            title="<%=h repository_summary(repo_name) %>"
-                            class="<%=h repository_class(repo_name) %>"><%=h repo_name %></a>
-                    </td>
-                <% else %>
-                    <td> &nbsp; </td>
-                <% end %>
-            <% end %>
-        </tr>
-    <% end %>
-</table>
-
-<h2>Categories</h2>
-
-<table class="links-list">
-    <% columnify(category_names, 4).each do | row | %>
-        <tr>
-            <% row.each do | cat_name | %>
-                <% if cat_name %>
-                    <td><a href="<%=h category_href(cat_name) %>"><%=h cat_name %></a>
-                    </td>
-                <% else %>
-                    <td> &nbsp; </td>
-                <% end %>
-            <% end %>
-        </tr>
-    <% end %>
-</table>
-
+<div class='row'>
+    <div class='col-md-6'>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>
+                <h2 class='panel-title'>Repositories</h2>
+            </div>
+            <div class='panel-body'>
+                <div class='table-responsive'><table class="links-list table">
+                    <% columnify(repository_names, 4).each do | row | %>
+                        <tr>
+                            <% row.each do | repo_name | %>
+                            <% if repo_name %>
+                                <td><a
+                                        href="<%=h repository_href(repo_name) %>"
+                                        title="<%=h repository_summary(repo_name) %>"
+                                        class="<%=h repository_class(repo_name) %>"><%=h repo_name %></a>
+                                </td>
+                            <% else %>
+                                <td> &nbsp; </td>
+                            <% end %>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                </table></div>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-6'>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>
+                <h2 class='panel-title'>Categories</h2>
+            </div>
+            <div class='panel-body'>
+                <div class='table-responsive'><table class="links-list table">
+                    <% columnify(category_names, 4).each do | row | %>
+                        <tr>
+                            <% row.each do | cat_name | %>
+                                <% if cat_name %>
+                                    <td><a href="<%=h category_href(cat_name) %>"><%=h cat_name %></a>
+                                    </td>
+                                <% else %>
+                                    <td> &nbsp; </td>
+                                <% end %>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                </table></div>
+            </div>
+        </div>
+    </div>
+</div>
