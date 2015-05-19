@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Exherbo: <%=h title %></title>
+        <title>Exherbo - <%=h title %></title>
         <link rel="stylesheet" type="text/css" href="<%= top_uri %>summer.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-		<% if feature? :twitter %>
-		<meta name="twitter:card" content="summary"/>
-		<meta name="twitter:site" content="@exherbo"/>
+        <% if feature? :twitter %>
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@exherbo"/>
 		<!-- <meta name="twitter:creator" content=""/> -->
-		<meta name="twitter:title" content="<%= title %>"/>
-		<meta name="twitter:description" content="<%= summary %>"/>
+        <meta name="twitter:title" content="<%= title %>"/>
+        <meta name="twitter:description" content="<%= summary %>"/>
 		<!-- <meta name="twitter:image" content=""> -->
-		<% end %>
+        <% end %>
     </head>
-    <body><div class="container">
-        <nav class="navbar navbar-default navbar-fixed-top">
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" data-target="#collapse" data-toggle="collapse" type="button">
@@ -38,7 +38,7 @@
                     <li><a href="//git.exherbo.org/summer/"><div class="fa fa-cubes"><!-- --></div> Packages</a></li>
                 </ul>
             </div>
-        </nav>
+        </nav><div class='container'>
 
         <div id="body">
             <h1><%=h title %></h1>
