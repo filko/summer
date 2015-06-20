@@ -181,3 +181,8 @@ td.best-id {
     padding-bottom: 0px;
     border-bottom: 0px;
 }
+
+tr:first-child th,
+tr:first-child td {
+    border-top: 0px !important;
+}
