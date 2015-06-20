@@ -186,3 +186,7 @@ tr:first-child th,
 tr:first-child td {
     border-top: 0px !important;
 }
+
+.metadata tbody th {
+    text-transform: capitalize;
+}
