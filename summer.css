@@ -92,9 +92,13 @@ th {
     font-weight: normal;
 }
 
-.navbar-form {
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
+.navbar-default .navbar-form {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.navbar-collapse {
+    box-shadow: none;
 }
 
 .searchbox {
