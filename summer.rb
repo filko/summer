@@ -15,7 +15,7 @@ include Paludis
 envspec = ":summer"
 OutputDir = "./output/"
 ExtraFiles = %w[summer.css zebrapig-headbox.png]
-Platforms = %w[amd64 arm armv7 x86]
+Platforms = %w[amd64 arm armv7 armv8 x86]
 
 GetoptLong.new(
     [ '--log-level',         GetoptLong::REQUIRED_ARGUMENT ],
