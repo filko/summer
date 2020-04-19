@@ -7,6 +7,7 @@ require 'summer/index_page'
 require 'summer/repository_page'
 require 'summer/category_page'
 require 'summer/package_page'
+require 'summer/repology_page'
 require 'summer/legacy'
 require 'Paludis'
 
@@ -65,6 +66,7 @@ puts
 
 index_page = IndexPage.new
 repository_pages, category_pages, package_pages = {}, {}, {}
+repology_page = RepologyPage.new(ids)
 
 print "Collecting repository information"
 
@@ -103,7 +105,7 @@ end
 puts
 
 print "Writing"
-[{ nil => index_page }, repository_pages, category_pages, package_pages].each do | set |
+[{ nil => index_page }, repository_pages, category_pages, package_pages, {nil => repology_page}].each do | set |
     print "*"
     set.values.each do | page |
         print "."
